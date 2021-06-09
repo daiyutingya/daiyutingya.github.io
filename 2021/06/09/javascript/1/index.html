@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="欺骗词法作用域, coral">
+    <meta name="keywords" content="coral">
     <meta name="description" content="222222">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>欺骗词法作用域 | coral</title>
+    <title>coral</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -320,12 +320,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">欺骗词法作用域</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -439,25 +439,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/javascript%E4%B8%8A-1/">
-                                <span class="chip bg-color">javascript上(1)</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">No tag</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/javascript/" class="post-category">
-                                javascript
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -466,7 +453,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-06-07
+                    2021-06-09
                 </div>
                 
 
@@ -490,40 +477,45 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>计算字符串，并执行里面的代码</p>
-<h3 id="eval-和-with"><a href="#eval-和-with" class="headerlink" title="eval(..) 和 with"></a>eval(..) 和 with</h3><h3 id="1、eval"><a href="#1、eval" class="headerlink" title="1、eval(..)"></a>1、eval(..)</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">1</span>、<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">str<span class="token punctuation">,</span> a</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- <span class="token function">eval</span><span class="token punctuation">(</span> str <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 欺骗！</span>
- console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> a<span class="token punctuation">,</span> b <span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <h2 id="this闭包作用域"><a href="#this闭包作用域" class="headerlink" title="this闭包作用域"></a>this闭包作用域</h2><h3 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h3><p>当函数执行时，会创建一个执行上下文的环境，分为创建和执行两个阶段</p>
+<ol>
+<li>创建阶段=》函数被调用但还未执行任何代码，拥有三个对象</li>
+<li>函数执行=&gt;分配变量,函数引用,赋值,代码执行</li>
+<li>执行上下文出栈等待虚拟机回收执行上下文<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">executionContext<span class="token operator">=</span><span class="token punctuation">&#123;</span>
+    scopeChain<span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token comment">//创建作用域链</span>
+    variableObject<span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token comment">//初始化变量函数形参</span>
+    <span class="token keyword">this</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token comment">//指定this</span>
 <span class="token punctuation">&#125;</span>
-<span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-<span class="token function">foo</span><span class="token punctuation">(</span> <span class="token string">"var b = 3;"</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1,3</span>
-<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
-<span class="token number">2</span>、<span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- <span class="token string">"use strict"</span><span class="token punctuation">;</span>
- <span class="token function">eval</span><span class="token punctuation">(</span> str <span class="token punctuation">)</span><span class="token punctuation">;</span>
- console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ReferenceError: a is not defined</span>
- <span class="token punctuation">&#125;</span>
- <span class="token function">foo</span><span class="token punctuation">(</span> <span class="token string">"var a = 2"</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>1、eval(..) 调用中的 “var b = 3;” 这段代码会被当作本来就在那里一样来处理。由于那段代码声明了一个新的变量 b，因此它对已经存在的 foo(..) 的词法作用域进行了修改。事实上，这段代码实际上在 foo(..) 内部创建了一个变量 b，并遮蔽了外部（全局）作用域中的同名变量。当 console.log(..) 被执行时，会在 foo(..) 的内部同时找到 a 和 b，但是永远也无法找到外部的 b。因此会输出“1, 3”而不是正常情况下会输出的“1, 2”<br>2、在严格模式的程序中，eval(..) 在运行时有其自己的词法作用域，意味着其中的声明无法修改所在的作用域</p>
-<h3 id="2、with"><a href="#2、with" class="headerlink" title="2、with(..)"></a>2、with(..)</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- <span class="token keyword">with</span> <span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
- a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
- <span class="token punctuation">&#125;</span>
+<span class="token keyword">function</span> <span class="token function">Demo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> name<span class="token operator">=</span><span class="token string">"111"</span>
+    <span class="token keyword">var</span> <span class="token function-variable function">getData</span><span class="token operator">=</span><span class="token keyword">function</span> <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">function</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
-<span class="token keyword">var</span> o1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
- a<span class="token operator">:</span> <span class="token number">3</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> o2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
- b<span class="token operator">:</span> <span class="token number">3</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token function">foo</span><span class="token punctuation">(</span> o1 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> o1<span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
-<span class="token function">foo</span><span class="token punctuation">(</span> o2 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> o2<span class="token punctuation">.</span>a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// undefined</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span> a <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2——不好，a 被泄漏到全局作用域上了！</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>根据你传递给它的对象凭空创建了一个全新的词法作用域</p>
-<h3 id="这两个机制的副作用是引擎无法在编译时对作用域查找进行优化，因为引擎只能谨慎地认-为这样的优化是无效的。使用这其中任何一个机制都将导致代码运行变慢。"><a href="#这两个机制的副作用是引擎无法在编译时对作用域查找进行优化，因为引擎只能谨慎地认-为这样的优化是无效的。使用这其中任何一个机制都将导致代码运行变慢。" class="headerlink" title="这两个机制的副作用是引擎无法在编译时对作用域查找进行优化，因为引擎只能谨慎地认 为这样的优化是无效的。使用这其中任何一个机制都将导致代码运行变慢。"></a>这两个机制的副作用是引擎无法在编译时对作用域查找进行优化，因为引擎只能谨慎地认 为这样的优化是无效的。使用这其中任何一个机制都将导致代码运行变慢。</h3>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h3></li>
+</ol>
+<ul>
+<li>浏览器中js的解释器是单线程，浏览器同一时间只能做一件事</li>
+<li>代码中只有一个全局执行上下文和无数个函数执行上下文，这些组成了执行上下文栈(Execution Stack)</li>
+<li>函数执行上下文结束后，会被移出执行上下文栈<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">function</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3>js中有全局作用域,函数作用域,es6之前是没有块级作用域<br>作用域链和上下文栈没有关系<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">  <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>   <span class="token keyword">var</span> person<span class="token operator">=</span><span class="token string">"outer"</span>
+ <span class="token keyword">function</span> <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>   <span class="token keyword">var</span> person<span class="token operator">=</span><span class="token string">"yuanxin"</span>
+     <span class="token keyword">function</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'name:'</span><span class="token operator">+</span>person<span class="token punctuation">)</span>
+     <span class="token punctuation">&#125;</span>
+     <span class="token keyword">return</span> <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ <span class="token punctuation">&#125;</span>
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3>有权访问另外一个作用域中的变量的函数（能够读取其他函数内部变量的函数）</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -549,7 +541,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/06/07/javascript1/txt1/">http://example.com/2021/06/07/javascript1/txt1/</a>
+                    <a href="http://example.com/2021/06/09/javascript/1/">http://example.com/2021/06/09/javascript/1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -586,11 +578,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/javascript%E4%B8%8A-1/">
-                                    <span class="chip bg-color">javascript上(1)</span>
-                                </a>
-                            
+                            <span class="chip bg-color">No tag</span>
                         </div>
                     
                 </div>
@@ -764,7 +752,44 @@ console<span class="token punctuation">.</span><span class="token function">log<
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/06/07/javascript1/txt2/">
+                <a href="/2021/06/09/javascript/1/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-09
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            John Doe
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/06/07/javascript/txt2/">
                     <div class="card-image">
                         
                         
@@ -780,9 +805,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -802,43 +827,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
                         <span class="chip bg-color">javascript上(2)</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/05/19/mime/index/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
-                        
-                        <span class="card-title"></span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            John Doe
-                            
-                        </span>
-                    </div>
                 </div>
                 
             </div>
